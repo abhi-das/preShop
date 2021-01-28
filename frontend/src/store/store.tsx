@@ -1,9 +1,11 @@
-import {createStore, applyMiddleware, compose, StoreEnhancer} from 'redux';
+import {createStore, applyMiddleware, StoreEnhancer} from 'redux';
 import logger from 'redux-logger';
 import {MakeStore, createWrapper, Context} from 'next-redux-wrapper';
-import reducer, {initState, State} from './reducer';
+// import reducer, {initState, State} from './reducer';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { initialState, rootReducer } from './reducers';
+import { AppState } from './types';
 
 const middlewares = applyMiddleware(thunkMiddleware, logger);
 // const composedEnhancers = compose(middlewares);
@@ -13,8 +15,8 @@ const storeEnhancers: StoreEnhancer = composeWithDevTools({
   name: "React-node-test"
 })(middlewares);
 
-export const makeStore: MakeStore<State> = (context: Context) => {
-    const store = createStore(reducer, initState, storeEnhancers);
+export const makeStore: MakeStore<AppState> = (context: Context) => {
+    const store = createStore(rootReducer, initialState, storeEnhancers);
 
     // if (module.hot) {
     //     module.hot.accept('./reducer', () => {
@@ -26,4 +28,4 @@ export const makeStore: MakeStore<State> = (context: Context) => {
     return store;
 };
 
-export const wrapper = createWrapper<State>(makeStore, {debug: false});
+export const wrapper = createWrapper<AppState>(makeStore, {debug: false});

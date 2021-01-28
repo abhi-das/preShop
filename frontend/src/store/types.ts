@@ -19,11 +19,15 @@ export interface Product {
     numReviews: number;
 }
 
-export type ProductState = {
-    products: Product[]
-}
+// export type ProductState = {
+//     products: Product[]
+// }
 
 export type ResponseError = {
     key?: string;
     errorText: string;
 };
+
+export type AppState = {
+    products: Product[]
+}

@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
-import { ProductState } from "../types";
+import { AppState } from "../types";
+// import { ProductState } from "../types";
 import { productReducer } from "./productReducer";
 
 
 
-export const initialState: ProductState = {
+export const initialState: AppState = {
     products: [{
         _id: '1',
         name: 'Airpods Wireless Bluetooth Headphones',
