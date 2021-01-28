@@ -14,10 +14,10 @@ export const productReducer = (
   action: ProductActions | AnyAction
 ) => {
   switch (action.type) {
-    // case HYDRATE:
-      // if (action.payload.app === "init") delete action.payload.app;
-      // if (action.payload.page === "init") delete action.payload.page;
-      // return { ...state, ...action.payload };
+    case HYDRATE:
+      if (action.payload.app === "init") delete action.payload.app;
+      if (action.payload.page === "init") delete action.payload.page;
+      return { ...state, ...action.payload };
       // return state;
     case ActionTypes.PRODUCT_FETCH_REQUEST: 
         return {
@@ -26,8 +26,9 @@ export const productReducer = (
         };
     case ActionTypes.PRODUCT_FETCH_REQUEST_SUCCESS: 
         return {
+          ...state,
             isLoading: false,
-            products: [...state.products, action.payload]
+            products: [...state.products, ...action.payload]
         };
     case ActionTypes.PRODUCT_FETCH_REQUEST_FAIL:
         return {
